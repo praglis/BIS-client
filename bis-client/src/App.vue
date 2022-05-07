@@ -38,19 +38,27 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+// import EventsIndex from './components/EventsIndex/EventsIndex.vue';
+// import EventsShow from "@/components/EventsShow/EventsShow";
+// import EventsCreate from "@/components/EventsCreate/EventsCreate";
+// import EventsEdit from "@/components/EventsEdit/EventsEdit";
+// import EventsFilter from "@/components/EventsFilter/EventsFilter";
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    // EventsIndex,
+    // EventsShow,
+    // EventsCreate,
+    // EventsEdit,
+    // EventsFilter,
   },
 
   data: () => ({
