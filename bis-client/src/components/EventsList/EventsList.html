@@ -1,4 +1,29 @@
-<section class="events-list">
-    <h1>events-list Component</h1>
-</section>
+<v-card
+        class="mx-auto"
+        max-width="40%"
+        tile
+>
+    <v-list-item>
+        <v-list-item-content>
+            <v-list-item-title class="text-h6">
+                Browse events from Bialystok
+            </v-list-item-title>
+        </v-list-item-content>
+    </v-list-item>
 
+    <v-list-item
+            v-for="event in events"
+            link
+            three-line
+    >
+        <v-list-item-content>
+            <v-list-item-title>{{ event.name }}</v-list-item-title>
+            <v-list-item-subtitle>
+                {{ event.date }}
+            </v-list-item-subtitle>
+            <v-list-item-subtitle>
+                {{ event.type }}
+            </v-list-item-subtitle>
+        </v-list-item-content>
+    </v-list-item>
+</v-card>

@@ -1,9 +1,7 @@
 <template>
   <section class="events-list">
-    <h1>events-index Component</h1>
-    <router-link to="/events/create">Go to Crea</router-link>
     <events-filter></events-filter>
-    <events-list></events-list>
+    <events-list class="mt-4"></events-list>
   </section>
 </template>
 
@@ -14,8 +12,8 @@ import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
 export default {
   name: 'events-index',
   components: {
-    EventsFilter,
-    EventsList
+    EventsList,
+    EventsFilter
   },
   props: [],
   data() {

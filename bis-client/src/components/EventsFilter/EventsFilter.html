@@ -1,4 +1,42 @@
-<section class="events-filter">
-    <h1>events-filter Component</h1>
-</section>
+<v-navigation-drawer
+        app
+        clipped
+        elevation="12"
+        permanent
+        width="356"
+>
+    <v-list-item>
+        <v-list-item-content>
+            <v-list-item-title class="text-h6">
+                Event filters
+            </v-list-item-title>
+        </v-list-item-content>
+    </v-list-item>
+
+    <v-divider></v-divider>
+
+    <v-expansion-panels>
+        <v-expansion-panel
+                v-for="filter in filters"
+                :key="filter.title"
+        >
+            <v-expansion-panel-header>
+                <v-list-item-title>{{ filter.title }}</v-list-item-title>
+            </v-expansion-panel-header>
+
+            <v-expansion-panel-content>
+                <v-date-picker
+                        v-if="filter.hasDatePicker"
+                        elevation="14"></v-date-picker>
+
+                <v-btn
+                        class="mt-2"
+                        color="accent"
+                >
+                    Send SOAP request
+                </v-btn>
+            </v-expansion-panel-content>
+        </v-expansion-panel>
+    </v-expansion-panels>
+</v-navigation-drawer>
 
