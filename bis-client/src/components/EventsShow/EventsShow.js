@@ -10,10 +10,13 @@ export default {
             labels: commons.labels,
             mode: 'show',
             eventModel: commons.mockData,
-            // picker: (new Date(this.eventModel - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
         }
     },
-    computed: {},
+    computed: {
+        dateModel() {
+            this?.eventModel?.date?.substr(0, 10)
+        }
+    },
     mounted() {
     },
     methods: {

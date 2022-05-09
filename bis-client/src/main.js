@@ -21,7 +21,5 @@ const app = new Vue({
     render: h => h(App)
 })
 
-// app.use(vuetify);
-// app.use(VueRouter);
 
 app.$mount('#app')

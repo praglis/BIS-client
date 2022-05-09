@@ -44,22 +44,11 @@
 </template>
 
 <script>
-// import EventsIndex from './components/EventsIndex/EventsIndex.vue';
-// import EventsShow from "@/components/EventsShow/EventsShow";
-// import EventsCreate from "@/components/EventsCreate/EventsCreate";
-// import EventsEdit from "@/components/EventsEdit/EventsEdit";
-// import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
 
 export default {
   name: 'App',
 
-  components: {
-    // EventsIndex,
-    // EventsShow,
-    // EventsCreate,
-    // EventsEdit,
-    // EventsFilter,
-  },
+  components: {},
 
   data: () => ({
     appTitle: 'Bialystok Info Service'

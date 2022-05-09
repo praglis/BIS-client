@@ -10,10 +10,13 @@ export default {
             labels: commons.labels,
             mode: 'create',
             eventModel: null,
-            // picker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
         }
     },
-    computed: {},
+    computed: {
+        dateModel() {
+            this?.eventModel?.date?.substr(0, 10)
+        }
+    },
     mounted() {
 
     },

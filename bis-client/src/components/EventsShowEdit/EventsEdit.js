@@ -9,10 +9,15 @@ export default {
             title: 'Edit event details',
             labels: commons.labels,
             eventModel: commons.mockData,
-            mode: 'edit'
+            mode: 'edit',
         }
     },
-    computed: {},
+    computed: {
+        dateModel() {
+            this?.eventModel?.date?.substr(0, 10)
+        }
+
+    },
     mounted() {
 
     },
