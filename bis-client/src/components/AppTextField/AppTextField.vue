@@ -1,9 +1,10 @@
 <template>
   <v-text-field
-      :disabled="disabled"
+      v-model="value"
       :label="name"
-      :value="value"
       outlined
+      :readonly="disabled"
+      @change="$emit('change', value)"
   ></v-text-field>
 </template>
 
@@ -16,16 +17,18 @@ export default {
       type: String,
       required: true
     },
-    value: {
-      type: String
-    },
     disabled: {
       type: Boolean,
       default: false
+    },
+    inValue: {
+      type: String
     }
   },
   data() {
-    return {}
+    return {
+      value: this.inValue
+    }
   },
   computed: {},
   mounted() {

@@ -12,11 +12,11 @@ export const labels = {
     description: 'Description'
 }
 
-export const mockData = {
+export let mockData = {
     id: 1,
     name: "Reid Compton Pivitol New Hampshire",
     type: "HungaryEventType",
-    date: "2021-04-28T05:03:26 -02:00",
+    date: "2021-04-28",
     description: "LOREM IPSUM DOLOR SIT AMENT"
 }
 

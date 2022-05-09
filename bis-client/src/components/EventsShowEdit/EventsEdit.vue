@@ -1,4 +1,4 @@
 <template src="../EventsShow/EventsShow.html"></template>
-<script src="./EventsEdit.js"></script>
+<script src="../EventsShow/EventsShow.js"></script>
 <style lang="sass" scoped src="./EventsEdit.sass"></style>
 
