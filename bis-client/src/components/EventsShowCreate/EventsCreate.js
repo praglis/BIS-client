@@ -9,7 +9,8 @@ export default {
             title: 'Create new event',
             labels: commons.labels,
             mode: 'create',
-            eventModel: null
+            eventModel: null,
+            // picker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
         }
     },
     computed: {},

@@ -4,8 +4,9 @@ export const
     }
 
 export const
-    getDateValOrElse = function (property, fallbackVal = new Date()) {
-        return getValOrElse(property, fallbackVal)
+    getDateValOrElse = function (properties, fallbackVal = new Date()) {
+        console.log(getValOrElse(properties, fallbackVal))
+        return getValOrElse(properties, fallbackVal)
     }
 
 /*
