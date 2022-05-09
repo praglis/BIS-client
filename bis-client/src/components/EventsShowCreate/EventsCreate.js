@@ -2,7 +2,7 @@ import * as commons from '../EventsShow/EventsShowCommons.js'
 
 export default {
     name: 'events-create',
-    components: {...commons.components},
+    componentsa: {...commons.components},
     props: [],
     data() {
         return {

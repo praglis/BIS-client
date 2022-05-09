@@ -1,7 +1,32 @@
 <v-container
         style="max-width: 60%"
 >
-    <div class="text-center text-h4 my-3">{{ title }}</div>
+    <v-row>
+        <v-col
+                cols="9"
+        >
+            <div class="text-h4 my-3 text-center">{{ title }}</div>
+        </v-col>
+        <v-col
+                cols="3"
+        >
+            <v-btn
+                    v-if="mode === 'show'"
+                    class="my-3"
+                    color="accent"
+                    @click="$router.replace('/events/edit/' + eventModel.id)"
+            >Edit
+            </v-btn>
+            <v-btn
+                    v-else-if="mode === 'edit'"
+                    class="my-3"
+                    color="warning"
+                    @click="$router.replace('/events/show/' + eventModel.id)"
+            >Cancel editing
+            </v-btn>
+        </v-col>
+    </v-row>
+
     <v-form>
         <app-text-field
                 :disabled="mode === 'show'"
@@ -24,6 +49,7 @@
                 :disabled="mode === 'show'"
                 :value="getStringValOrElse([eventModel, 'description'])"
                 outlined
+                :label="labels.description"
         ></v-textarea>
 
         <v-btn v-if="mode !== 'show'">Submit changes</v-btn>
