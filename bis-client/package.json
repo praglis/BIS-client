@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
+    "vue-router": "^3.5.3",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
@@ -38,7 +39,16 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.html"
+        ],
+        "processor": "vue/.vue"
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
