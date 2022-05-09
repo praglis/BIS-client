@@ -1,4 +1,23 @@
-<section class="events-show">
-    <h1>events-show Component</h1>
-</section>
+<v-container
+        style="max-width: 60%"
+>
+    <div class="text-center text-h4 my-3">{{ title }}</div>
+    <v-form>
+        <app-text-field
+                :disabled="mode === 'show'"
+                :name="labels.name"
+                :value="getStringValOrElse([eventModel, 'name'])"
+                class="mt-2"></app-text-field>
+        <app-text-field
+                :disabled="mode === 'show'"
+                :name="labels.type"
+                :value="getStringValOrElse([eventModel, 'type'])"
+                class="mt-2"></app-text-field>
+        <v-date-picker :disabled=" mode===
+        'show'"></v-date-picker>
+        <v-textarea :disabled="mode === 'show'"></v-textarea>
+        <v-btn v-if="mode !== 'show'">Submit changes</v-btn>
+    </v-form>
+</v-container>
+
 

@@ -5,9 +5,28 @@
 >
     <v-list-item>
         <v-list-item-content>
-            <v-list-item-title class="text-h6">
-                Browse events from Bialystok
-            </v-list-item-title>
+            <v-row no-gutters>
+                <v-col
+                        cols="6"
+                >
+                    <v-list-item-title
+                            class="pa-2 text-h6"
+                    >
+                        {{ listHeader }}
+                    </v-list-item-title>
+                </v-col>
+                <v-col
+                        cols="6"
+                >
+                    <v-btn
+                            class="my-auto px-2"
+                            color="accent"
+                    >
+                        Request export to PDF
+                    </v-btn>
+                </v-col>
+            </v-row>
+
         </v-list-item-content>
     </v-list-item>
 
@@ -15,6 +34,7 @@
             v-for="event in events"
             link
             three-line
+            @click="$router.replace('/events/show/' + event.id)"
     >
         <v-list-item-content>
             <v-list-item-title>{{ event.name }}</v-list-item-title>

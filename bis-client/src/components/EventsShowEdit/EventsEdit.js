@@ -1,16 +1,15 @@
-/* eslint-disable */
-import * as commons from './EventsShowCommons.js'
+import * as commons from '../EventsShow/EventsShowCommons.js'
 
 export default {
-    name: 'events-show',
+    name: 'events-edit',
     components: {...commons.components},
     props: [],
     data() {
         return {
-            title: 'Event details',
+            title: 'Edit event details',
             labels: commons.labels,
-            mode: 'show',
-            eventModel: commons.mockData
+            eventModel: commons.mockData,
+            mode: 'edit'
         }
     },
     computed: {},

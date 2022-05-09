@@ -1,6 +1,6 @@
 import EventsShow from "@/components/EventsShow/EventsShow.vue";
-import EventsEdit from "@/components/EventsEdit/EventsEdit.vue";
-import EventsCreate from "@/components/EventsCreate/EventsCreate.vue";
+import EventsEdit from "@/components/EventsShowEdit/EventsEdit.vue";
+import EventsCreate from "@/components/EventsShowCreate/EventsCreate.vue";
 import EventsIndex from "@/components/EventsIndex/EventsIndex.vue";
 
 export default [

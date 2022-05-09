@@ -40,15 +40,15 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "overrides": [
-        {
-          "files": [
-            "*.html"
-          ],
-          "processor": "vue/.vue"
-        }
-      ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.html"
+        ],
+        "processor": "vue/.vue"
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
