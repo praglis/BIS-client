@@ -9,7 +9,7 @@ export default {
             title: 'Event details',
             labels: commons.labels,
             mode: 'show',
-            eventModel: commons.mockData,
+            eventModel: commons.emptyMock,
         }
     },
     computed: {
@@ -23,7 +23,7 @@ export default {
         }
     },
     created() {
-        this.sendGetRequest(this.$route.params['id'])
+        this.eventModel = this.sendGetRequest(this.$route.params['id'])
     },
     methods: {
         ...commons.methods,
@@ -41,6 +41,7 @@ export default {
             //     .catch(err => {
             //         console.log(err)
             //     });
+            return commons.mockData
         },
         submitChanges() {
             console.log('Request: updateEvent, event = ', this.eventModel)

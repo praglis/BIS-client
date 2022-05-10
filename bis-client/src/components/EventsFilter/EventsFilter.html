@@ -27,11 +27,14 @@
             <v-expansion-panel-content>
                 <v-date-picker
                         v-if="filter.hasDatePicker"
-                        elevation="14"></v-date-picker>
+                        v-model="date"
+                        elevation="14"
+                ></v-date-picker>
 
                 <v-btn
                         class="mt-2"
                         color="accent"
+                        @click="$emit('send-request', prepareRequestInfo(filter))"
                 >
                     Send SOAP request
                 </v-btn>

@@ -21,6 +21,8 @@
                     <v-btn
                             class="my-auto px-2"
                             color="accent"
+                            :disabled="!isPdfDownloadable"
+                            @click="$emit('pdf-request')"
                     >
                         Request export to PDF
                     </v-btn>

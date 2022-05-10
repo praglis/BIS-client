@@ -9,13 +9,7 @@ export default {
             title: 'Create new event',
             labels: commons.labels,
             mode: 'create',
-            eventModel: {
-                id: null,
-                name: '',
-                type: '',
-                date: null,
-                description: null
-            },
+            eventModel: commons.emptyMock
         }
     },
     computed: {
@@ -35,6 +29,7 @@ export default {
         ...commons.methods,
         submitChanges() {
             console.log('Request: createEvent, event = ', this.eventModel)
+            this.$router.replace('/events/show/' + 201)
         }
     }
 }

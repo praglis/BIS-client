@@ -20,6 +20,14 @@ export let mockData = {
     description: "LOREM IPSUM DOLOR SIT AMENT"
 }
 
+export let emptyMock = {
+    id: null,
+    name: "",
+    type: "",
+    date: null,
+    description: ""
+}
+
 export const methods = {
     getStringValOrElse,
     getDateValOrElse
