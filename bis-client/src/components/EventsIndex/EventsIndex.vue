@@ -1,30 +1,16 @@
 <template>
   <section class="events-list">
-    <events-filter></events-filter>
-    <events-list class="mt-4"></events-list>
+    <events-filter
+        @send-request="events = sendFilteredRequest($event)"></events-filter>
+    <events-list
+        :events="events"
+        :is-pdf-downloadable="lastRequestInfo !== null"
+        class="mt-4"
+        @pdf-request="sendGetPdfRequest(preparePdfRequestParams)"
+    ></events-list>
   </section>
 </template>
 
-<script>
-import EventsList from "@/components/EventsList/EventsList.vue";
-import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
-
-export default {
-  name: 'events-index',
-  components: {
-    EventsList,
-    EventsFilter
-  },
-  props: [],
-  data() {
-    return {}
-  },
-  computed: {},
-  mounted() {
-
-  },
-  methods: {}
-}
-</script>
+<script src="./EventsIndex.js"></script>
 <style lang="sass" scoped src="./EventsIndex.sass"></style>
 

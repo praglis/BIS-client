@@ -2,26 +2,35 @@ import * as commons from '../EventsShow/EventsShowCommons.js'
 
 export default {
     name: 'events-create',
-    componentsa: {...commons.components},
+    components: {...commons.components},
     props: [],
     data() {
         return {
             title: 'Create new event',
             labels: commons.labels,
             mode: 'create',
-            eventModel: null,
+            eventModel: commons.emptyMock
         }
     },
     computed: {
-        dateModel() {
-            this?.eventModel?.date?.substr(0, 10)
+        dateModel: {
+            get() {
+                return this?.eventModel?.date
+            },
+            set(newDate) {
+                this.eventModel.date = newDate
+            }
         }
     },
     mounted() {
 
     },
     methods: {
-        ...commons.methods
+        ...commons.methods,
+        submitChanges() {
+            console.log('Request: createEvent, event = ', this.eventModel)
+            this.$router.replace('/events/show/' + 201)
+        }
     }
 }
 
