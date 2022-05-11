@@ -1,7 +1,7 @@
 <template>
   <section class="events-list">
     <events-filter
-        @send-request="events = sendFilteredRequest($event)"></events-filter>
+        @send-request="sendFilteredRequest($event)"></events-filter>
     <events-list
         :events="events"
         :is-pdf-downloadable="lastRequestInfo !== null"

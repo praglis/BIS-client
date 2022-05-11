@@ -1,6 +1,8 @@
 import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
-import {downloadFile} from "@/helpers";
+import {downloadFile, getPayloadFromSoapJson} from "@/helpers";
+import axios from "axios";
+import {xml2json} from "xml-js";
 
 export default {
     name: 'events-index',
@@ -54,26 +56,52 @@ export default {
         }
     },
     computed: {},
-    mounted() {
-
-    },
     methods: {
         sendFilteredRequest(requestInfo) {
             this.lastRequestInfo = requestInfo
             console.log('sendFilteredRequest() param requestInfo = ', requestInfo)
             switch (requestInfo.filterType) {
                 case 'NONE':
-                    return this.sendGetAllRequest()
+                    this.sendGetAllRequest()
+                    break;
                 case 'DAY':
-                    return this.sendGetByDayRequest(requestInfo.day)
+                    this.sendGetByDayRequest(requestInfo.day)
+                    break;
                 case 'WEEK':
-                    return this.sendGetByWeekRequest(requestInfo.weekNumber)
+                    this.sendGetByWeekRequest(requestInfo.weekNumber)
+                    break;
 
             }
         },
         sendGetAllRequest() {
-            console.log('Request: getEvents', this.fetchedEvents)
-            return this.fetchedEvents
+
+            axios.get('requests/getEventsRequest.xml')
+                .then(getEventsRequest => {
+                    console.log('getEvents request', getEventsRequest.data)
+                    axios.post('http://localhost:8181/soap-api/events?wsdl',
+                        getEventsRequest.data,
+                        {
+                            headers:
+                                {'Content-Type': 'text/xml'}
+                        })
+                        .then(res => {
+                            console.log('getEvents response', res);
+                            const jsonResponse = JSON.parse(xml2json(res.data, {compact: true}))
+
+                            const responsePayload = getPayloadFromSoapJson(jsonResponse, 'getEventsResponse')
+                            responsePayload.forEach(eventObj => {
+                                Object.keys(eventObj).map((key) => {
+                                    eventObj[key] = eventObj[key]._text
+                                })
+                            })
+                            console.log('response payload', responsePayload);
+
+                            this.events = responsePayload
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        });
+                })
         },
         sendGetByDayRequest(day) {
             console.log('Request: getEventsByDay, day = ', day)
@@ -96,5 +124,3 @@ export default {
         }
     }
 }
-
-

@@ -52,3 +52,8 @@ export const
             link.parentNode.removeChild(link);
         }, 0);
     }
+
+export const
+    getPayloadFromSoapJson = function (soapJson, responseName) {
+        return soapJson['soap:Envelope']['soap:Body'][responseName].return.event
+    }
