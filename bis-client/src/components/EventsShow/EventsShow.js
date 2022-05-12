@@ -16,6 +16,12 @@ export default {
         }
     },
     computed: {
+        eventName() {
+            return this.eventModel?.name ?? ''
+        },
+        eventType() {
+            return this.eventModel?.type ?? ''
+        },
         dateModel: {
             get() {
                 return this?.eventModel?.date
@@ -23,9 +29,8 @@ export default {
             set(newDate) {
                 this.eventModel.date = newDate
             }
-        },
-        name: this.eventModel?.name ?? '',
-        type: this.eventModel?.type ?? ''
+        }
+
     },
     created() {
         this.sendGetRequest(this.$route.params['id'])

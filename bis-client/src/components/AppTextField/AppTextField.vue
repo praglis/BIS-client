@@ -26,13 +26,12 @@ export default {
     }
   },
   data() {
-    return {
-      value: this.inValue
-    }
+    return {}
   },
-  computed: {},
-  mounted() {
-
+  computed: {
+    value() {
+      return this.inValue
+    }
   },
   methods: {}
 }

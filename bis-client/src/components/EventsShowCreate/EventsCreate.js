@@ -17,6 +17,12 @@ export default {
         }
     },
     computed: {
+        eventName() {
+            return this?.eventModel?.name ?? ''
+        },
+        eventType() {
+            return this?.eventModel?.type ?? ''
+        },
         dateModel: {
             get() {
                 return this?.eventModel?.date
