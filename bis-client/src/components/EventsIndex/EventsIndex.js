@@ -1,8 +1,12 @@
 import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
-import {getPayloadFromSoapJson, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
+import {
+    getSoapPayloadFromHttpResponse,
+    isArray,
+    isObject,
+    mapObjectPropsToStringsInArray
+} from "@/helpers";
 import axios from "axios";
-import {xml2json} from "xml-js";
 
 export default {
     name: 'events-index',
@@ -48,11 +52,8 @@ export default {
                                 {'Content-Type': 'text/xml'}
                         })
                         .then(res => {
-                            console.log('getEvents response', res);
-                            const jsonResponse = JSON.parse(xml2json(res.data, {compact: true}))
-                            console.log('getEvents response in JSON', jsonResponse);
+                            let responsePayload = getSoapPayloadFromHttpResponse('getEvents', res)
 
-                            let responsePayload = getPayloadFromSoapJson(jsonResponse, 'ns2:getEventsResponse')
                             if (isObject(responsePayload)) {
                                 responsePayload = [responsePayload]
                             } else if (!isArray(responsePayload)) {

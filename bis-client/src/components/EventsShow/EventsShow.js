@@ -1,4 +1,7 @@
 import * as commons from './EventsShowCommons.js'
+import {prepareGetEventRequest} from "@/requests";
+import axios from "axios";
+import {getSoapPayloadFromHttpResponse, mapObjectPropsToStrings} from "@/helpers";
 
 export default {
     name: 'events-show',
@@ -13,6 +16,12 @@ export default {
         }
     },
     computed: {
+        eventName() {
+            return this.eventModel?.name ?? ''
+        },
+        eventType() {
+            return this.eventModel?.type ?? ''
+        },
         dateModel: {
             get() {
                 return this?.eventModel?.date
@@ -21,26 +30,32 @@ export default {
                 this.eventModel.date = newDate
             }
         }
+
     },
     created() {
-        this.eventModel = this.sendGetRequest(this.$route.params['id'])
+        this.sendGetRequest(this.$route.params['id'])
     },
     methods: {
         ...commons.methods,
         sendGetRequest(id) {
-            console.log('Request: getEvent, id = ', id)
-            // axios.post('http://www.webservicex.com/CurrencyConvertor.asmx?wsdl',
-            //     xmls,
-            //     {
-            //         headers:
-            //             {'Content-Type': 'text/xml'}
-            //     })
-            //     .then(res => {
-            //         console.log(res);
-            //     })
-            //     .catch(err => {
-            //         console.log(err)
-            //     });
+            const request = prepareGetEventRequest(id);
+            console.log('getEvent request', request)
+            axios.post('http://localhost:8181/soap-api/events?wsdl',
+                request,
+                {
+                    headers:
+                        {'Content-Type': 'text/xml'}
+                })
+                .then(res => {
+                    console.log('getEvent response', res);
+                    let responsePayload = getSoapPayloadFromHttpResponse('getEvent', res)
+                    mapObjectPropsToStrings(responsePayload)
+                    this.eventModel = responsePayload
+                    console.log('this.eventModel', this.eventModel);
+                })
+                .catch(err => {
+                    console.log(err)
+                });
             return commons.mockData
         },
         submitChanges() {
