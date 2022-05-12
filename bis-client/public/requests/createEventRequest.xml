@@ -1,0 +1,13 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <createEvent xmlns="http://events.bis.mil.rag/">
+            <!-- Optional -->
+            <arg0 xmlns="">
+                <name>Wiadomo co wiadomo z kim</name>
+                <type>WINK K WINK</type>
+                <description>cudowne wydarzenie, polecam</description>
+                <date>2022-04-02</date>
+            </arg0>
+        </createEvent>
+    </Body>
+</Envelope>
