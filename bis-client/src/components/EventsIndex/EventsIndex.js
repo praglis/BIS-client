@@ -7,6 +7,7 @@ import {
     mapObjectPropsToStringsInArray
 } from "@/helpers";
 import axios from "axios";
+import {prepareDeleteEventRequest} from "@/requests";
 
 export default {
     name: 'events-index',
@@ -77,6 +78,23 @@ export default {
                             console.log(err)
                         });
                 })
+        },
+        sendDeleteRequest(id) {
+            const request = prepareDeleteEventRequest(id);
+            console.log('getEvent request', request)
+            axios.post('http://localhost:8181/soap-api/events?wsdl',
+                request,
+                {
+                    headers:
+                        {'Content-Type': 'text/xml'}
+                })
+                .then(res => {
+                            console.log('deleteEvent response', res);
+                            this.sendGetAllRequest();
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        });
         },
         sendGetByDayRequest(day) {
             console.log('Request: getEventsByDay, day = ', day)

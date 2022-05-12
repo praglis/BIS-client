@@ -15,6 +15,17 @@ export const
     }
 
 export const
+    prepareDeleteEventRequest = function (id) {
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <deleteEvent xmlns="http://events.bis.mil.rag/">
+            <arg0 xmlns="">${id}</arg0>
+        </deleteEvent>
+    </Body>
+</Envelope>`
+    }
+
+export const
     prepareGetEventRequest = function (id) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>

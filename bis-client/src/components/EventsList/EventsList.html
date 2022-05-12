@@ -36,7 +36,6 @@
             v-for="event in events"
             link
             three-line
-            @click="$router.replace('/events/show/' + event.id)"
     >
         <v-list-item-content>
             <v-list-item-title>{{ event.name }}</v-list-item-title>
@@ -46,6 +45,8 @@
             <v-list-item-subtitle>
                 {{ event.type }}
             </v-list-item-subtitle>
+            <v-btn @click="$router.replace('/events/show/' + event.id)">Show event</v-btn>
+            <v-btn @click="$emit('delete-event', event.id)">Delete</v-btn>
         </v-list-item-content>
     </v-list-item>
 </v-card>
