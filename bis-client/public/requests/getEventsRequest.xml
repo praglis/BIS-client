@@ -1,5 +1,5 @@
 <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
-        <getEvents xmlns="http://bis.mil.rag/"/>
+        <getEvents xmlns="http://events.bis.mil.rag/"/>
     </Body>
 </Envelope>

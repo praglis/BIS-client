@@ -55,5 +55,24 @@ export const
 
 export const
     getPayloadFromSoapJson = function (soapJson, responseName) {
-        return soapJson['soap:Envelope']['soap:Body'][responseName].return.event
+        return soapJson['soap:Envelope']['soap:Body'][responseName].return ?? null
+    }
+
+export const
+    isArray = function (a) {
+        return (!!a) && (a.constructor === Array);
+    };
+export const
+    isObject = function (a) {
+        return (!!a) && (a.constructor === Object);
+    };
+
+export const
+    mapObjectPropsToStringsInArray = function (obj) {
+        obj.forEach(eventObj => {
+            Object.keys(eventObj).map((key) => {
+                eventObj[key] = eventObj[key]._text
+            })
+        })
+        return obj
     }
