@@ -6,7 +6,7 @@
         :events="events"
         :is-pdf-downloadable="events.length > 0"
         class="mt-4"
-        @pdf-request="sendGetPdfRequest(preparePdfRequestParams)"
+        @pdf-request="sendGetPdfRequest()"
     ></events-list>
 
     <v-snackbar

@@ -1,0 +1,5 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <generatePdf xmlns="http://events.bis.mil.rag/"/>
+    </Body>
+</Envelope>

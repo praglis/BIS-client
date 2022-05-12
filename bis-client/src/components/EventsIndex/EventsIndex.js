@@ -1,6 +1,6 @@
 import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
-import {downloadFile, getPayloadFromSoapJson, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
+import {getPayloadFromSoapJson, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
 import axios from "axios";
 import {xml2json} from "xml-js";
 
@@ -87,11 +87,35 @@ export default {
             console.log('Response: getEventsByDay, events = ', this.fetchedEvents)
             return this.fetchedEvents
         },
-        sendGetPdfRequest(requestParams) {
-            console.log('Request: getPdf, requestParams = ', {requestParams})
-            const file = new File([], 'samplePdf', {type: 'application/pdf'});
-            console.log('Response: getPdf, PDF = ', file)
-            downloadFile(file)
+        sendGetPdfRequest() {
+            let fileData;
+            axios.get('requests/generatePdf.xml')
+                .then(generatePdf => {
+                    console.log('Request: generatePdf')
+                    axios.post('http://localhost:8181/soap-api/events?wsdl',
+                        generatePdf.data,
+                        {
+                            headers:
+                                {'Content-Type': 'text/xml'}
+                        })
+                        .then(res => {
+                            console.log('generatePdf response', res);
+                            fileData = res.data.split('<return>')[1].split('</return>')[0]
+                            console.log(res)
+                            var link = document.createElement('a');
+                            link.innerHTML = 'Download PDF file';
+                            link.download = 'file.pdf';
+                            link.href = 'data:application/octet-stream;base64,' + fileData;
+                            document.body.appendChild(link);
+                            link.click();
+                            setTimeout(() => {
+                                document.body.removeChild(link);
+                            }, 0);
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        });
+                })
         },
         preparePdfRequestParams() {
             return this.lastRequestInfo
