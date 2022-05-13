@@ -29,7 +29,7 @@
 
     <v-form>
         <app-text-field
-                :in-value="getStringValOrElse([eventModel, 'name'])"
+                :in-value="eventName"
                 :disabled="mode === 'show'"
                 :name="labels.name"
                 class="mt-2"
@@ -37,7 +37,7 @@
         ></app-text-field>
 
         <app-text-field
-                :in-value="getStringValOrElse([eventModel, 'type'])"
+                :in-value="eventType"
                 :disabled="mode === 'show'"
                 :name="labels.type"
                 class="mt-2"
@@ -63,6 +63,24 @@
         >Submit changes
         </v-btn>
     </v-form>
+
+    <v-snackbar
+            v-model="showErrorMsg"
+    >
+        {{ errorMessage }}
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+                    color="accent"
+                    text
+                    v-bind="attrs"
+                    @click="showErrorMsg = false"
+            >
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
+
 </v-container>
 
 

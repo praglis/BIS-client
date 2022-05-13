@@ -1,3 +1,5 @@
+import {xml2json} from "xml-js";
+
 export const
     getStringValOrElse = function (properties, fallbackVal = '') {
         return getValOrElse(properties, fallbackVal)
@@ -51,4 +53,43 @@ export const
             URL.revokeObjectURL(link.href);
             link.parentNode.removeChild(link);
         }, 0);
+    }
+
+export const
+    getSoapPayloadFromHttpResponse = function (operationName, res) {
+        console.log(operationName + ' response', res);
+        const jsonResponse = JSON.parse(xml2json(res.data, {compact: true}))
+        console.log(operationName + ' response in JSON', jsonResponse);
+
+        return getPayloadFromSoapJson(jsonResponse, `ns2:${operationName}Response`)
+    }
+
+export const
+    getPayloadFromSoapJson = function (soapJson, responseName) {
+        return soapJson['soap:Envelope']['soap:Body'][responseName].return ?? null
+    }
+
+export const
+    isArray = function (a) {
+        return (!!a) && (a.constructor === Array);
+    };
+export const
+    isObject = function (a) {
+        return (!!a) && (a.constructor === Object);
+    };
+
+export const
+    mapObjectPropsToStringsInArray = function (obj) {
+        obj.forEach(eventObj => {
+            mapObjectPropsToStrings(eventObj)
+        })
+        return obj
+    }
+
+export const
+    mapObjectPropsToStrings = function (eventObj) {
+        Object.keys(eventObj).map((key) => {
+            eventObj[key] = eventObj[key]._text
+        })
+        return eventObj
     }
