@@ -1,39 +1,12 @@
 <template>
   <v-text-field
-      v-model="value"
+      v-model="computedActualValue"
       :label="name"
       outlined
       :readonly="disabled"
-      @change="$emit('change', value)"
+      @change="$emit('change', getStringValOrElse([actualValue]))"
   ></v-text-field>
 </template>
 
-<script>
-export default {
-  name: 'app-text-field',
-  components: {},
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    inValue: {
-      type: String
-    }
-  },
-  data() {
-    return {}
-  },
-  computed: {
-    value() {
-      return this.inValue
-    }
-  },
-  methods: {}
-}
+<script src="./AppTextField.js"></script>
 
-</script>
