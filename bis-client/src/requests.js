@@ -37,6 +37,16 @@ export const
     }
 
 export const
+    prepareGetAllEventsRequest = function () {
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <getEvents xmlns="http://events.bis.mil.rag/"/>
+    </Body>
+</Envelope>
+`
+    }
+
+export const
     prepareUpdateEventRequest = function (eventModel) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
