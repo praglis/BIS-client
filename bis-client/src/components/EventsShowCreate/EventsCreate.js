@@ -13,15 +13,17 @@ export default {
             title: 'Create new event',
             labels: commons.labels,
             mode: 'create',
-            eventModel: commons.emptyMock
+            eventModel: commons.emptyMock,
+            showErrorMsg: false,
+            errorMessage: 'Could not create an event.'
         }
     },
     computed: {
         eventName() {
-            return this?.eventModel?.name ?? ''
+            return this?.eventModel?.name
         },
         eventType() {
-            return this?.eventModel?.type ?? ''
+            return this?.eventModel?.type
         },
         dateModel: {
             get() {
@@ -56,19 +58,21 @@ export default {
                     } else if (!isArray(responsePayload)) {
                         console.log('ERROR: Response payload is neither an object or an array.')
                         this.events = []
-                        this.showNoEventsMsg = true
+                        this.showErrorMsg = true
                         return
                     }
-                    console.log('response payload1', responsePayload);
+                    console.log('Response payload', responsePayload);
 //
                     if (responsePayload) {
-                        this.$router.replace('/events/show/' + responsePayload.id)
+                        if (this.mode === 'create') this.$router.replace('/events/show/' + responsePayload.id)
+                        else if (this.mode === 'edit') this.mode = 'show'
                     } else {
-                        this.events = []
-                        this.showNoEventsMsg = true
+                        console.log('ERROR: Response payload is empty.')
+                        this.showErrorMsg = true
                     }
                 })
                 .catch(err => {
+                    this.showErrorMsg = true
                     console.log(err)
                 });
         }

@@ -63,6 +63,24 @@
         >Submit changes
         </v-btn>
     </v-form>
+
+    <v-snackbar
+            v-model="showErrorMsg"
+    >
+        {{ errorMessage }}
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+                    color="accent"
+                    text
+                    v-bind="attrs"
+                    @click="showErrorMsg = false"
+            >
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
+
 </v-container>
 
 

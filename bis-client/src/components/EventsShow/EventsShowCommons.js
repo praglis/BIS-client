@@ -1,4 +1,4 @@
-import AppTextField from "@/components/AppTextField/AppTextField";
+import AppTextField from "@/components/AppTextField/AppTextField.vue";
 import {getDateValOrElse, getStringValOrElse} from '@/helpers'
 
 export const components = {

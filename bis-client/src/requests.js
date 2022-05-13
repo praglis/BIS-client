@@ -35,3 +35,20 @@ export const
     </Body>
 </Envelope>`
     }
+
+export const
+    prepareUpdateEventRequest = function (eventModel) {
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <updateEvent xmlns="http://events.bis.mil.rag/">
+            <arg0 xmlns="">
+                <id>${eventModel.id}</id>
+                <name>${eventModel.name}</name>
+                <type>${eventModel.type}</type>
+                <description>${eventModel.description}</description>
+                <date>${eventModel.date}</date>
+            </arg0>
+        </updateEvent>
+    </Body>
+</Envelope>`
+    }

@@ -63,7 +63,6 @@ export default {
                                 this.showNoEventsMsg = true
                                 return
                             }
-                            console.log('response payload1', responsePayload);
 
                             if (responsePayload) {
                                 responsePayload = mapObjectPropsToStringsInArray(responsePayload)
@@ -72,7 +71,7 @@ export default {
                                 this.events = []
                                 this.showNoEventsMsg = true
                             }
-                            console.log('response payload2', responsePayload);
+                            console.log('response payload', responsePayload);
                         })
                         .catch(err => {
                             console.log(err)
