@@ -15,9 +15,6 @@ export default {
         }
     },
     computed: {},
-    mounted() {
-
-    },
     methods: {
         prepareRequestInfo(filter) {
             switch (filter.id) {

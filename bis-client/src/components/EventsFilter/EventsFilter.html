@@ -26,8 +26,9 @@
 
             <v-expansion-panel-content>
                 <v-date-picker
-                        v-if="filter.hasDatePicker"
                         v-model="date"
+                        :first-day-of-week="1"
+                        v-if="filter.hasDatePicker"
                         elevation="14"
                 ></v-date-picker>
 

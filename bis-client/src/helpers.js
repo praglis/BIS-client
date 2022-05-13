@@ -7,7 +7,6 @@ export const
 
 export const
     getDateValOrElse = function (properties, fallbackVal = new Date()) {
-        console.log(getValOrElse(properties, fallbackVal))
         return getValOrElse(properties, fallbackVal)
     }
 
@@ -29,13 +28,13 @@ export const
     }
 
 export const
-    getWeekNumber = function (date) {
-        const oneJan = new Date(date.getFullYear(), 0, 1);
-        const numberOfDays = Math.floor((date - oneJan) / (24 * 60 * 60 * 1000));
-        return Math.ceil((date.getDay() - 4 + numberOfDays) / 7)
+    getWeekNumber = function (currentDate) {
+        const startDate = new Date(currentDate.getFullYear(), 0, 1);
+        var days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+        return Math.ceil((startDate.getDay() + days) / 7)
     }
 
-export const
+export const //todo czemu nie użyte
     downloadFile = function (file) {
         // Create a link and set the URL using `createObjectURL`
         const link = document.createElement("a");
@@ -57,9 +56,9 @@ export const
 
 export const
     getSoapPayloadFromHttpResponse = function (operationName, res) {
-        console.log(operationName + ' response', res);
+        console.log('[INFO]:' + operationName + ' response', res);
         const jsonResponse = JSON.parse(xml2json(res.data, {compact: true}))
-        console.log(operationName + ' response in JSON', jsonResponse);
+        console.log('[INFO]:' + operationName + ' response in JSON', jsonResponse);
 
         return getPayloadFromSoapJson(jsonResponse, `ns2:${operationName}Response`)
     }
