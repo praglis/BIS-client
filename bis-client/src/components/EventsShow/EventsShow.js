@@ -50,7 +50,7 @@ export default {
                 })
                 .then(res => {
                     let responsePayload = getSoapPayloadFromHttpResponse('getEvent', res)
-                    mapObjectPropsToStrings(responsePayload)
+                    responsePayload = mapObjectPropsToStrings(responsePayload)
                     this.eventModel = responsePayload
                     console.log('this.eventModel', this.eventModel);
                 })
@@ -76,6 +76,7 @@ export default {
                     this.eventModel = responsePayload
                     this.mode = 'show'
                     console.log('this.eventModel', this.eventModel);
+                    this.$router.replace('/events/')
                 })
                 .catch(err => {
                     console.log(err)

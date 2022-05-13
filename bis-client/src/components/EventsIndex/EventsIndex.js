@@ -55,6 +55,8 @@ export default {
                         .then(res => {
                             let responsePayload = getSoapPayloadFromHttpResponse('getEvents', res)
 
+                            console.log("RESPONSE")
+                            console.log(responsePayload)
                             if (isObject(responsePayload)) {
                                 responsePayload = [responsePayload]
                             } else if (!isArray(responsePayload)) {
@@ -63,7 +65,8 @@ export default {
                                 this.showNoEventsMsg = true
                                 return
                             }
-
+                            console.log("RESPONSE")
+                            console.log(responsePayload)
                             if (responsePayload) {
                                 responsePayload = mapObjectPropsToStringsInArray(responsePayload)
                                 this.events = responsePayload
@@ -80,7 +83,7 @@ export default {
         },
         sendDeleteRequest(id) {
             const request = prepareDeleteEventRequest(id);
-            console.log('getEvent request', request)
+            console.log('deleteEvent request', request)
             axios.post('http://localhost:8181/soap-api/events?wsdl',
                 request,
                 {
