@@ -1,5 +1,3 @@
-import {getWeekNumber} from "@/helpers";
-
 export default {
     name: 'events-list',
     components: {},
@@ -28,7 +26,7 @@ export default {
                 case 'BY_WEEK':
                     return {
                         filterType: 'WEEK',
-                        week: getWeekNumber(new Date(this.date))
+                        week: (new Date(this.date)).getWeek()
                     }
             }
         }

@@ -3,6 +3,7 @@ import App from './App.vue'
 import Vuetify from './plugins/vuetify'
 import VueRouter from 'vue-router'
 import routes from './routes'
+import weekNumberScript from './weekNumber.js'
 
 Vue.config.productionTip = false
 
@@ -23,3 +24,5 @@ const app = new Vue({
 
 
 app.$mount('#app')
+
+weekNumberScript()
