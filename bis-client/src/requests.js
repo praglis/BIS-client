@@ -3,7 +3,7 @@ export const
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <createEvent xmlns="http://events.bis.mil.rag/">
-            <arg0 xmlns="http://events.bis.mil.rag/">
+            <arg0>
                 <name>${eventModel.name}</name>
                 <type>${eventModel.type}</type>
                 <description>${eventModel.description}</description>
@@ -19,7 +19,7 @@ export const
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <deleteEvent xmlns="http://events.bis.mil.rag/">
-            <arg0 xmlns="">${id}</arg0>
+            <arg0>${id}</arg0>
         </deleteEvent>
     </Body>
 </Envelope>`
@@ -30,10 +30,20 @@ export const
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <getEvent xmlns="http://events.bis.mil.rag/">
-            <arg0 xmlns="">${id}</arg0>
+            <arg0>${id}</arg0>
         </getEvent>
     </Body>
 </Envelope>`
+    }
+
+export const
+    prepareGetAllEventsRequest = function () {
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <getEvents xmlns="http://events.bis.mil.rag/"/>
+    </Body>
+</Envelope>
+`
     }
 
 export const
@@ -41,7 +51,7 @@ export const
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <updateEvent xmlns="http://events.bis.mil.rag/">
-            <arg0 xmlns="">
+            <arg0>
                 <id>${eventModel.id}</id>
                 <name>${eventModel.name}</name>
                 <type>${eventModel.type}</type>

@@ -2,7 +2,7 @@ import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
 import {getSoapPayloadFromHttpResponse, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
 import axios from "axios";
-import {prepareDeleteEventRequest, prepareGetEventsByDayRequest, prepareGetEventsByWeekRequest} from "@/requests";
+import {prepareDeleteEventRequest, prepareGetAllEventsRequest} from "@/requests";
 
 export default {
     name: 'events-index',
@@ -41,23 +41,20 @@ export default {
             }
         },
         sendGetAllRequest() {
-            axios.get('requests/getEventsRequest.xml')
-                .then(getEventsRequest => {
-                    console.log('[INFO]: getEvents request', getEventsRequest.data)
-                    axios.post('http://localhost:8181/soap-api/events?wsdl',
-                        getEventsRequest.data,
-                        {
-                            headers:
-                                {'Content-Type': 'text/xml'}
-                        })
-                        .then(response => {
-                            this.handleEventsResponse(response, 'getEvents')
-                        })
-                        .catch(err => {
-                            console.log('[ERROR]: Could not fetch all events.')
-                            console.log(err)
-                        });
+            const request = prepareGetAllEventsRequest();
+            console.log('[INFO]: getEvents request', request)
+            axios.post('http://localhost:8181/soap-api/events?wsdl',
+                request,
+                {
+                    headers: {'Content-Type': 'text/xml'}
                 })
+                .then(response => {
+                    this.handleEventsResponse(response, 'getEvents')
+                })
+                .catch(err => {
+                    console.log('[ERROR]: Could not fetch all events.')
+                    console.log(err)
+                });
         },
         sendDeleteRequest(id) {
             const request = prepareDeleteEventRequest(id);
@@ -68,11 +65,10 @@ export default {
                     headers: {'Content-Type': 'text/xml'}
                 })
                 .then(res => {
-                    console.log('[INFO]: deleteEvent response', res);
+                    console.log('deleteEvent response', res);
                     this.sendFilteredRequest();
                 })
                 .catch(err => {
-                    console.log('[ERROR]: Could not delete the event.')
                     console.log(err)
                 });
         },
@@ -122,9 +118,9 @@ export default {
                                 {'Content-Type': 'text/xml'}
                         })
                         .then(res => {
-                            console.log('[INFO] generatePdf response', res);
+                            console.log('generatePdf response', res);
                             fileData = res.data.split('<return>')[1].split('</return>')[0]
-                            console.log('[DEBUG] generatePdf response after some kind of split?', res)
+                            console.log(res)
                             var link = document.createElement('a');
                             link.innerHTML = 'Download PDF file';
                             link.download = 'file.pdf';

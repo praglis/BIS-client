@@ -60,11 +60,13 @@ export const
         const jsonResponse = JSON.parse(xml2json(res.data, {compact: true}))
         console.log('[INFO]:' + operationName + ' response in JSON', jsonResponse);
 
-        return getPayloadFromSoapJson(jsonResponse, `ns2:${operationName}Response`)
+        return getPayloadFromSoapJson(jsonResponse, `${operationName}Response`)
     }
 
 export const
     getPayloadFromSoapJson = function (soapJson, responseName) {
+    console.log(soapJson['soap:Envelope']['soap:Body'])
+        console.log(responseName)
         return soapJson['soap:Envelope']['soap:Body'][responseName].return ?? null
     }
 
@@ -79,6 +81,7 @@ export const
 
 export const
     mapObjectPropsToStringsInArray = function (obj) {
+    console.log("MAP")
         obj.forEach(eventObj => {
             mapObjectPropsToStrings(eventObj)
         })
@@ -87,6 +90,8 @@ export const
 
 export const
     mapObjectPropsToStrings = function (eventObj) {
+    console.log("fds")
+    console.log(eventObj)
         Object.keys(eventObj).map((key) => {
             eventObj[key] = eventObj[key]._text
         })
