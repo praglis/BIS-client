@@ -2,7 +2,12 @@ import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
 import {getSoapPayloadFromHttpResponse, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
 import axios from "axios";
-import {prepareDeleteEventRequest, prepareGetAllEventsRequest} from "@/requests";
+import {
+    prepareDeleteEventRequest,
+    prepareGetAllEventsRequest,
+    prepareGetEventsByDayRequest,
+    prepareGetEventsByWeekRequest
+} from "@/requests";
 
 export default {
     name: 'events-index',
