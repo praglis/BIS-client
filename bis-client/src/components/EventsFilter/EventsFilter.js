@@ -5,9 +5,9 @@ export default {
     data() {
         return {
             filters: [
-                {title: 'All events', icon: 'mdi-view-dashboard', hasDatePicker: false, id: 'ALL'},
-                {title: 'Events by day', icon: 'mdi-image', hasDatePicker: true, id: 'BY_DAY'},
-                {title: 'Events by week', icon: 'mdi-help-box', hasDatePicker: true, id: 'BY_WEEK'},
+                {title: 'All events', hasDatePicker: false, id: 'ALL'},
+                {title: 'Events by day', hasDatePicker: true, id: 'BY_DAY'},
+                {title: 'Events by week', hasDatePicker: true, id: 'BY_WEEK'},
             ],
             date: new Date().toISOString().substring(0, 10),
         }
@@ -15,6 +15,7 @@ export default {
     computed: {},
     methods: {
         prepareRequestInfo(filter) {
+            let chosenDate
             switch (filter.id) {
                 case 'ALL':
                     return {filterType: 'NONE'}
@@ -24,9 +25,11 @@ export default {
                         day: this.date
                     }
                 case 'BY_WEEK':
+                    chosenDate = new Date(this.date)
                     return {
                         filterType: 'WEEK',
-                        week: (new Date(this.date)).getWeek()
+                        year: chosenDate.getFullYear(),
+                        week: chosenDate.getWeek()
                     }
             }
         }
