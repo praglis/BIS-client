@@ -1,6 +1,12 @@
 import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
-import {getSoapPayloadFromHttpResponse, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
+import {
+    downloadFile,
+    getSoapPayloadFromHttpResponse,
+    isArray,
+    isObject,
+    mapObjectPropsToStringsInArray
+} from "@/helpers";
 import axios from "axios";
 import {
     prepareDeleteEventRequest,
@@ -70,7 +76,7 @@ export default {
                     headers: {'Content-Type': 'text/xml'}
                 })
                 .then(res => {
-                    console.log('deleteEvent response', res);
+                    console.log('[INFO] deleteEvent response', res);
                     this.sendFilteredRequest();
                 })
                 .catch(err => {
@@ -123,18 +129,10 @@ export default {
                                 {'Content-Type': 'text/xml'}
                         })
                         .then(res => {
-                            console.log('generatePdf response', res);
+                            console.log('[INFO] generatePdf response', res);
                             fileData = res.data.split('<return>')[1].split('</return>')[0]
                             console.log(res)
-                            var link = document.createElement('a');
-                            link.innerHTML = 'Download PDF file';
-                            link.download = 'file.pdf';
-                            link.href = 'data:application/octet-stream;base64,' + fileData;
-                            document.body.appendChild(link);
-                            link.click();
-                            setTimeout(() => {
-                                document.body.removeChild(link);
-                            }, 0);
+                            downloadFile('events.pdf', fileData)
                         })
                         .catch(err => {
                             console.log('[ERROR]: Could not get a PDF file.')

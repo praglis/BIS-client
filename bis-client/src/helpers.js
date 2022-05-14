@@ -28,29 +28,17 @@ export const
     }
 
 export const
-    getWeekNumber = function (currentDate) {
-        const startDate = new Date(currentDate.getFullYear(), 0, 1);
-        var days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
-        return Math.ceil((startDate.getDay() + days) / 7)
-    }
-
-export const //todo czemu nie użyte
-    downloadFile = function (file) {
-        // Create a link and set the URL using `createObjectURL`
+    downloadFile = function (fileName, fileData) {
         const link = document.createElement("a");
-        link.style.display = "none";
-        link.href = URL.createObjectURL(file);
-        link.download = file.name;
+        link.innerHTML = 'Download PDF file';
+        link.download = fileName;
+        link.href = 'data:application/octet-stream;base64,' + fileData;
 
-        // It needs to be added to the DOM so it can be clicked
         document.body.appendChild(link);
         link.click();
 
-        // To make this work on Firefox we need to wait
-        // a little while before removing it.
         setTimeout(() => {
-            URL.revokeObjectURL(link.href);
-            link.parentNode.removeChild(link);
+            document.body.removeChild(link);
         }, 0);
     }
 
@@ -65,7 +53,7 @@ export const
 
 export const
     getPayloadFromSoapJson = function (soapJson, responseName) {
-    console.log(soapJson['soap:Envelope']['soap:Body'])
+        console.log(soapJson['soap:Envelope']['soap:Body'])
         console.log(responseName)
         return soapJson['soap:Envelope']['soap:Body'][responseName].return ?? null
     }
@@ -81,7 +69,7 @@ export const
 
 export const
     mapObjectPropsToStringsInArray = function (obj) {
-    console.log("MAP")
+        console.log("[DEBUG] mapObjectPropsToStringsInArray(obj), obj = ", obj)
         obj.forEach(eventObj => {
             mapObjectPropsToStrings(eventObj)
         })
@@ -90,8 +78,7 @@ export const
 
 export const
     mapObjectPropsToStrings = function (eventObj) {
-    console.log("fds")
-    console.log(eventObj)
+        console.log("[DEBUG] mapObjectPropsToStrings(eventObj), eventObj = ", eventObj)
         Object.keys(eventObj).map((key) => {
             eventObj[key] = eventObj[key]._text
         })
