@@ -69,7 +69,7 @@ export const
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <getEventsForDay xmlns="http://events.bis.mil.rag/">
-            <arg0 xmlns="">${date ?? ''}</arg0>
+            <arg0>${date ?? ''}</arg0>
         </getEventsForDay>
     </Body>
 </Envelope>`
@@ -81,7 +81,7 @@ export const
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <getEventsForWeek xmlns="http://events.bis.mil.rag/">
-            <arg0 xmlns="">${weekNumber ?? ''}</arg0>
+            <arg0>${weekNumber ?? ''}</arg0>
         </getEventsForWeek>
     </Body>
 </Envelope>`

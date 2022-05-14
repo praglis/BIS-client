@@ -6,7 +6,7 @@ export default {
     name: 'events-create',
     components: {...commons.components},
     props: [],
-    data() {
+    data() {//todo stare dane zostają BIS-16
         return {
             title: 'Create new event',
             labels: commons.labels,
