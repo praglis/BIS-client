@@ -7,7 +7,7 @@ export const
                 <name>${eventModel.name}</name>
                 <type>${eventModel.type}</type>
                 <description>${eventModel.description}</description>
-                <date>${eventModel.date}</date>
+                <date>${eventModel.date ?? ''}</date>
             </arg0>
         </createEvent>
     </Body>
@@ -56,9 +56,33 @@ export const
                 <name>${eventModel.name}</name>
                 <type>${eventModel.type}</type>
                 <description>${eventModel.description}</description>
-                <date>${eventModel.date}</date>
+                <date>${eventModel.date ?? ''}</date>
             </arg0>
         </updateEvent>
+    </Body>
+</Envelope>`
+    }
+
+export const
+    prepareGetEventsByDayRequest = function (date) {
+        console.log('[DEBUG]: prepareGetEventsByDayRequest for date: ', date)
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <getEventsForDay xmlns="http://events.bis.mil.rag/">
+            <arg0 xmlns="">${date ?? ''}</arg0>
+        </getEventsForDay>
+    </Body>
+</Envelope>`
+    }
+
+export const
+    prepareGetEventsByWeekRequest = function (weekNumber) {
+        console.log('[DEBUG]: prepareGetEventsByWeekRequest for weekNumber: ', weekNumber)
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <getEventsForWeek xmlns="http://events.bis.mil.rag/">
+            <arg0 xmlns="">${weekNumber ?? ''}</arg0>
+        </getEventsForWeek>
     </Body>
 </Envelope>`
     }

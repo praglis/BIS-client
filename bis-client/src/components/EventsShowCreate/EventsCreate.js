@@ -36,7 +36,7 @@ export default {
         ...commons.methods,
         submitChanges() {
             const request = prepareCreateEventRequest(this.eventModel)
-            console.log('createEvent request', request)
+            console.log('[INFO]: createEvent request', request)
 
             axios.post('http://localhost:8181/soap-api/events?wsdl',
                 request,
@@ -45,7 +45,7 @@ export default {
                         {'Content-Type': 'text/xml'}
                 })
                 .then(res => {
-                    console.log('createEvent response', res);
+                    console.log('[INFO]: createEvent response', res);
                     this.$router.replace('/events')
                 })
                 .catch(err => {

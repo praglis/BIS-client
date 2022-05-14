@@ -41,7 +41,7 @@ export default {
         ...commons.methods,
         sendGetRequest(id) {
             const request = prepareGetEventRequest(id);
-            console.log('getEvent request', request)
+            console.log('[INFO]: getEvent request', request)
             axios.post('http://localhost:8181/soap-api/events?wsdl',
                 request,
                 {
@@ -52,16 +52,16 @@ export default {
                     let responsePayload = getSoapPayloadFromHttpResponse('getEvent', res)
                     responsePayload = mapObjectPropsToStrings(responsePayload)
                     this.eventModel = responsePayload
-                    console.log('this.eventModel', this.eventModel);
+                    console.log('[INFO]: this.eventModel', this.eventModel);
                 })
                 .catch(err => {
                     console.log(err)
                 });
         },
         submitChanges() {
-            console.log('submitChanges()L preparing updateEvent request for this.eventModel', this.eventModel)
+            console.log('[INFO]: submitChanges() preparing updateEvent request for this.eventModel', this.eventModel)
             const request = prepareUpdateEventRequest(this.eventModel);
-            console.log('updateEvent request', request)
+            console.log('[INFO]: updateEvent request', request)
 
             axios.post('http://localhost:8181/soap-api/events?wsdl',
                 request,
@@ -75,8 +75,8 @@ export default {
 
                     this.eventModel = responsePayload
                     this.mode = 'show'
-                    console.log('this.eventModel', this.eventModel);
-                    this.$router.replace('/events/')
+                    console.log('[INFO]: this.eventModel', this.eventModel);
+                    this.$router.replace('/events')
                 })
                 .catch(err => {
                     console.log(err)
