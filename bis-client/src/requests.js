@@ -76,12 +76,14 @@ export const
     }
 
 export const
-    prepareGetEventsByWeekRequest = function (weekNumber) {
-        console.log('[DEBUG]: prepareGetEventsByWeekRequest for weekNumber: ', weekNumber)
+    prepareGetEventsByWeekRequest = function (weekNumber, year) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
     <Body>
         <getEventsForWeek xmlns="http://events.bis.mil.rag/">
-            <arg0>${weekNumber ?? ''}</arg0>
+            <arg0>
+                <week>${weekNumber}</week>
+                <year>${year}</year>
+            </arg0>
         </getEventsForWeek>
     </Body>
 </Envelope>`
