@@ -1,6 +1,12 @@
+const authorizedHeader = '<Header>\n' +
+    '        <WS-Security-Username>BIS-client</WS-Security-Username>\n' +
+    '        <WS-Security-Password>Runner78910</WS-Security-Password>\n' +
+    '    </Header>'
+
 export const
     prepareCreateEventRequest = function (eventModel) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+${authorizedHeader}
     <Body>
         <createEvent xmlns="http://events.bis.mil.rag/">
             <arg0>
@@ -17,6 +23,7 @@ export const
 export const
     prepareDeleteEventRequest = function (id) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+${authorizedHeader}
     <Body>
         <deleteEvent xmlns="http://events.bis.mil.rag/">
             <arg0>${id}</arg0>
@@ -28,6 +35,7 @@ export const
 export const
     prepareGetEventRequest = function (id) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+${authorizedHeader}
     <Body>
         <getEvent xmlns="http://events.bis.mil.rag/">
             <arg0>${id}</arg0>
@@ -38,7 +46,9 @@ export const
 
 export const
     prepareGetAllEventsRequest = function () {
+        console.log('[DEBUG] prepareGetAllEventsRequest authorizedHeader', authorizedHeader)
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+${authorizedHeader}
     <Body>
         <getEvents xmlns="http://events.bis.mil.rag/"/>
     </Body>
@@ -49,6 +59,7 @@ export const
 export const
     prepareUpdateEventRequest = function (eventModel) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+${authorizedHeader}
     <Body>
         <updateEvent xmlns="http://events.bis.mil.rag/">
             <arg0>
@@ -67,6 +78,7 @@ export const
     prepareGetEventsByDayRequest = function (date) {
         console.log('[DEBUG]: prepareGetEventsByDayRequest for date: ', date)
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    ${authorizedHeader}
     <Body>
         <getEventsForDay xmlns="http://events.bis.mil.rag/">
             <arg0>${date ?? ''}</arg0>
@@ -78,6 +90,7 @@ export const
 export const
     prepareGetEventsByWeekRequest = function (weekNumber, year) {
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+${authorizedHeader}
     <Body>
         <getEventsForWeek xmlns="http://events.bis.mil.rag/">
             <arg0>
