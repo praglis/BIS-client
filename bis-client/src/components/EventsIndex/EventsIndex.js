@@ -1,12 +1,6 @@
 import EventsList from "@/components/EventsList/EventsList.vue";
 import EventsFilter from "@/components/EventsFilter/EventsFilter.vue";
-import {
-    downloadFile,
-    getSoapPayloadFromHttpResponse,
-    isArray,
-    isObject,
-    mapObjectPropsToStringsInArray
-} from "@/helpers";
+import {getSoapPayloadFromHttpResponse, isArray, isObject, mapObjectPropsToStringsInArray} from "@/helpers";
 import axios from "axios";
 import {
     prepareDeleteEventRequest,
@@ -125,29 +119,6 @@ export default {
                     console.log('[ERROR]: Could not fetch events by week.')
                     console.log(err)
                 });
-        },
-        sendGetPdfRequest() {
-            let fileData;
-            axios.get('requests/generatePdf.xml')
-                .then(generatePdf => {
-                    console.log('[INFO] generatePdf request')
-                    axios.post('http://localhost:8181/soap-api/events?wsdl',
-                        generatePdf.data,
-                        {
-                            headers:
-                                {'Content-Type': 'text/xml'}
-                        })
-                        .then(res => {
-                            console.log('[INFO] generatePdf response', res);
-                            fileData = res.data.split('<return>')[1].split('</return>')[0]
-                            console.log(res)
-                            downloadFile('events.pdf', fileData)
-                        })
-                        .catch(err => {
-                            console.log('[ERROR]: Could not get a PDF file.')
-                            console.log(err)
-                        });
-                })
         },
         preparePdfRequestParams() {
             return this.lastRequestInfo
