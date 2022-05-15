@@ -1,49 +1,9 @@
-<template>
-  <v-app>
-    <v-app-bar
-        app
-        color="primary"
-        dark
-        clipped-left
-    >
-      <div class="d-flex align-center">
-        <router-link to="/events">
-          <v-img
-              alt="Vuetify Logo"
-              class="shrink mr-2"
-              contain
-              src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-              transition="scale-transition"
-              width="40"
-          />
-        </router-link>
-      </div>
-
-      <v-toolbar-title
-          :style="{ cursor: 'pointer'}"
-          class="d-flex align-center"
-          @click="$router.replace('/events')"
-      >
-        {{ appTitle }}
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-
-      <v-btn
-          color="accent"
-          @click="$router.replace('/events/create')"
-      >
-        New Event
-      </v-btn>
-    </v-app-bar>
-
-
-    <v-main>
-      <router-view></router-view>
-    </v-main>
-  </v-app>
-</template>
+<template src="./App.html"></template>
 
 <script>
+
+import axios from "axios";
+import {downloadFile} from "@/helpers";
 
 export default {
   name: 'App',
@@ -51,7 +11,30 @@ export default {
   components: {},
 
   data: () => ({
-    appTitle: 'Bialystok Info Service'
+    appTitle: 'Bialystok Info Service',
+    sendGetPdfRequest() {
+      let fileData;
+      axios.get('requests/generatePdf.xml')
+          .then(generatePdf => {
+            console.log('[INFO] generatePdf request')
+            axios.post('http://localhost:8181/soap-api/events?wsdl',
+                generatePdf.data,
+                {
+                  headers:
+                      {'Content-Type': 'text/xml'}
+                })
+                .then(res => {
+                  console.log('[INFO] generatePdf response', res);
+                  fileData = res.data.split('<return>')[1].split('</return>')[0]
+                  console.log(res)
+                  downloadFile('events.pdf', fileData)
+                })
+                .catch(err => {
+                  console.log('[ERROR]: Could not get a PDF file.')
+                  console.log(err)
+                });
+          })
+    }
   }),
 };
 </script>

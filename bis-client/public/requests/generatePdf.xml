@@ -1,4 +1,8 @@
 <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Header>
+        <WS-Security-Username>BIS-client</WS-Security-Username>
+        <WS-Security-Password>Runner78910</WS-Security-Password>
+    </Header>
     <Body>
         <generatePdf xmlns="http://events.bis.mil.rag/"/>
     </Body>
