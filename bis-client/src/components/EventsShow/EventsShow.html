@@ -26,8 +26,17 @@
             </v-btn>
         </v-col>
     </v-row>
+    <v-row>
+        <v-col cols="9">
+            <v-img :src="`${image}`"></v-img>
+        </v-col>
+    </v-row>
 
     <v-form>
+        <v-file-input v-if="mode === 'edit' || mode === 'create'"
+                      accept="image/png, image/jpeg" @change="changeImage($event)"
+                      size="10485760"
+        ></v-file-input>
         <app-text-field
                 :in-value="eventName"
                 :disabled="mode === 'show'"

@@ -45,6 +45,18 @@ ${authorizedHeader}
     }
 
 export const
+    prepareGetImageRequest = function (id) {
+        return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+            ${authorizedHeader}
+            <Body>
+                <downloadImageForEvent xmlns="http://mtom.bis.mil.rag/">
+                    <arg0>${id}</arg0>
+                </downloadImageForEvent>
+            </Body>
+        </Envelope>`
+    }
+
+export const
     prepareGetAllEventsRequest = function () {
         console.log('[DEBUG] prepareGetAllEventsRequest authorizedHeader', authorizedHeader)
         return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -54,6 +66,19 @@ ${authorizedHeader}
     </Body>
 </Envelope>
 `
+    }
+
+export const
+    prepareUploadImageRequest = function (image, id) {
+    return `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    ${authorizedHeader}
+    <Body>
+        <uploadImageForEvent xmlns="http://mtom.bis.mil.rag/">
+            <arg0>${image}</arg0>
+            <arg1>${id}</arg1>
+        </uploadImageForEvent>
+    </Body>
+</Envelope>`
     }
 
 export const
